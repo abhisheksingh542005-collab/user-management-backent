@@ -18,6 +18,9 @@ app.use(async (req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is running smoothly!");
+});
 
 // Baaki middleware ke sath ye add kar
 // index.js me ye line zaroor
