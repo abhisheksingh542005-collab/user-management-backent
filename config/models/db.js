@@ -1,9 +1,19 @@
 import mongoose from "mongoose";
 
-const connectToMongo = () => {
-  mongoose.connect("mongodb://127.0.0.1:27017/myDatabase")
-    .then(() => console.log("MongoDB Connected Successfully"))
-    .catch((err) => console.error("Connection Error:", err));
+const connectToMongo = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+  
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      bufferCommands: false, // Connection na hone par queries hanging block kar dega
+    });
+    console.log("MongoDB Connected Successfully");
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error);
+    throw error;
+  }
 };
 
 export default connectToMongo;
