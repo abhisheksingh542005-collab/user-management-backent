@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import connectToMongo from "./config/models/db.js";
+import connectToMongo from "./config/db.js";
 import userroutes from"./routes/user.js";
 import dotenv from "dotenv";
 
