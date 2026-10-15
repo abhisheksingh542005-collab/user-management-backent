@@ -1,19 +1,21 @@
 import mongoose from "mongoose";
 
-const connectToMongo = async () => {
-  if (mongoose.connection.readyState >= 1) {
-    return;
-  }
-  
+const connecttomongo = async () => {
   try {
+    // Agar pehle se connected hai toh dubara connect mat karo
+    if (mongoose.connections[0].readyState) {
+      return;
+    }
+    
     await mongoose.connect(process.env.MONGO_URI, {
-      bufferCommands: false, // Connection na hone par queries hanging block kar dega
+      dbName: "user-management-db",
+      bufferCommands: true, // Ise true rakhein ya hata dein
     });
-    console.log("MongoDB Connected Successfully");
+    
+    console.log("MongoDB connected successfully");
   } catch (error) {
-    console.error("MongoDB Connection Error:", error);
-    throw error;
+    console.error("MongoDB connection error:", error);
   }
 };
 
-export default connectToMongo;
+export default connecttomongo;

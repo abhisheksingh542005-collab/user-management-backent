@@ -2,7 +2,9 @@ import express from "express";
 import cors from "cors";
 import connecttomongo from "./config/models/db.js";
 import userroutes from"./routes/user.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
